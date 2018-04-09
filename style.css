@@ -3,6 +3,7 @@
   height: 525px;
   background-color: lightblue;
   margin: 0 auto;
+  margin-top: 50px;
   display: flex;
 }
 .leftWrap{
@@ -63,11 +64,15 @@
 }
 
 .textAreaWrapper{
-  width: 270px;
+  width: 254px;;
   height: 489px;
   background-color: rgb(221, 224, 229);
   border: medium none;
   margin: 0px;
-  padding: 0px;
+  padding-left: 15px;
   font-family: arial;
+}
+
+.row .rootHideBtn{
+  color: #fff;
 }

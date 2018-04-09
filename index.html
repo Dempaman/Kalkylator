@@ -25,16 +25,16 @@
         </div>
 
         <div class = 'row'>
-          <div></div>
-          <div @click= "rootFunction">√</div>
+          <div @click = "resetAll">CE</div>
+          <div class = 'static' v-bind:class = "{'rootHideBtn': isA}" @click= "rootFunction">√</div>
           <div @click= "squareFunction">x²</div>
-          <div></div>
+          <div @click = "removeNumber" >«</div>
         </div>
 
         <div class = 'row'>
-          <div @click = "resetAll">CE</div>
-          <div >C</div>
-          <div>«</div>
+          <div></div>
+          <div></div>
+          <div></div>
           <div @click= "devideFunction" id='bigger'>÷</div>
         </div>
 

@@ -9,7 +9,8 @@ window.addEventListener('load', function(event){
       displayNum: 0,
       operator: null,
       historik: '',
-      counter: 0
+      counter: 0,
+      isA: true
     },
     directives: {
       focus: {
@@ -24,6 +25,7 @@ window.addEventListener('load', function(event){
         if(this.operator === null){
           this.oldNum += num;
           this.displayNum = this.oldNum;
+          this.checkIfRootTrue();
           if(this.counter > 0){
             //this.historik += this.displayNum;
           }else{
@@ -37,6 +39,21 @@ window.addEventListener('load', function(event){
         }
       },
 
+      removeNumber: function(){
+        if(this.operator === null){
+          this.checkIfRootTrue();
+          this.oldNum = this.oldNum.slice(0, -1);
+          this.historik = this.historik.slice(0, -1);
+          //if(!this.displayNum){
+            this.displayNum = this.displayNum.slice(0, -1)
+            console.log("this.displayNum ", this.displayNum);
+        //  }
+        }else {
+          this.currentNum = this.currentNum.slice(0, -1);
+          this.displayNum = this.displayNum.slice(0, -1);
+        }
+      },
+
       addFunction: function(){
         if(this.operator != '+' || this.operator === null){
           this.result = this.oldNum;
@@ -45,11 +62,6 @@ window.addEventListener('load', function(event){
         }
         this.operator = '+';
         this.result = parseFloat(this.oldNum) + parseFloat(this.currentNum);
-        /*console.log('nu har operatorn fått ', this.operator)
-        console.log('this.displayNum =', this.displayNum)
-        console.log('this.oldNum = ', this.oldNum)
-        console.log('this.currentNum = ', this.currentNum)
-        console.log('this.result = ', this.result) */
         if(this.result){
           this.historik += this.displayNum;
           this.partResult();
@@ -61,7 +73,9 @@ window.addEventListener('load', function(event){
           }else{
             this.historik += " + " ;
           }
-        console.log('result ha no number yet... PLUS')
+          this.checkIfRootTrue();
+          //this.historik += "0"
+          console.log('result ha no number yet... PLUS')
         }
       },
 
@@ -69,7 +83,6 @@ window.addEventListener('load', function(event){
         if(!this.oldNum){
           this.oldNum = 0;
         }
-          console.log("this.oldNum ", this.oldNum);
           if(this.operator != '-' || this.operator === null){
             this.result = this.oldNum;
             this.finalResult();
@@ -88,7 +101,8 @@ window.addEventListener('load', function(event){
             }else{
               this.historik += " - " ;
             }
-          console.log('result ha no number yet...')
+            this.checkIfRootTrue();
+            console.log('result ha no number yet...')
           }
       },
 
@@ -157,15 +171,10 @@ window.addEventListener('load', function(event){
       counterFunction: function(){
         if(!this.currentNum){
           this.currentNum = 0;
-          console.log('är this.currentNum  0 nu??', this.currentNum )
-          console.log('är this.result 0 nu??', this.result)
-          console.log('är this.displayNum 0 nu??', this.displayNum)
-          console.log('är this.oldNum 0 nu??', this.oldNum)
         }
         this.counter += 1;
         this.finalResult();
         this.partResult();
-        console.log('räknar den?? ', this.counter);
       },
 
       finalResult: function(){
@@ -176,6 +185,7 @@ window.addEventListener('load', function(event){
             }
             this.result = parseFloat(this.oldNum) + parseFloat(this.currentNum);
             this.historik += + this.currentNum + " = " + this.result + '\n';
+            this.checkRootInSwitch();
             break;
           case '-':
             if(!this.currentNum){
@@ -183,6 +193,8 @@ window.addEventListener('load', function(event){
             }
             this.result = parseFloat(this.oldNum) - parseFloat(this.currentNum);
             this.historik += + this.currentNum + " = " + this.result + '\n';
+            console.log("this.result", this.result)
+            this.checkRootInSwitch();
             break;
           case '*':
             if(!this.currentNum){
@@ -190,6 +202,7 @@ window.addEventListener('load', function(event){
             }
             this.result = parseFloat(this.oldNum) * parseFloat(this.currentNum);
             this.historik += + this.currentNum + " = " + this.result + '\n';
+            this.checkRootInSwitch();
             break;
           case '/':
             if(!this.currentNum){
@@ -197,6 +210,7 @@ window.addEventListener('load', function(event){
             }
             this.result = parseFloat(this.oldNum) / parseFloat(this.currentNum);
             this.historik += + this.currentNum + " = " + this.result + '\n';
+            this.checkRootInSwitch();
             break;
           case '√':
             if(!this.currentNum){
@@ -204,6 +218,7 @@ window.addEventListener('load', function(event){
             }
             this.result = Math.sqrt(parseFloat(this.oldNum));
             this.historik += "√" + " = " + this.result +'\n';
+            this.checkRootInSwitch();
             break;
           case 'x²':
             if(!this.currentNum){
@@ -211,6 +226,7 @@ window.addEventListener('load', function(event){
             }
             this.result = parseFloat(this.oldNum) * this.oldNum;
             this.historik += "x²" + " = " + this.result +'\n';
+            this.checkRootInSwitch();
             break;
         }
         //this.partResult();
@@ -219,9 +235,7 @@ window.addEventListener('load', function(event){
 
       partResult: function(){
         this.displayNum = this.result;
-        console.log('displayNum', this.displayNum)
         this.oldNum = '' + this.result + '';
-        console.log('oldNum ', this.oldNum)
         this.currentNum = '';
         this.operator = null;
       },
@@ -232,6 +246,7 @@ window.addEventListener('load', function(event){
         this.result = 0,
         this.displayNum = 0,
         this.operator = null
+        this.historik += '\n';
       },
 
       checkAddedNumberAfterEqualFunction: function(){
@@ -277,13 +292,34 @@ window.addEventListener('load', function(event){
           this.multFunction();
         }else if (event.key == "/"){
           this.devideFunction();
+        }else if (event.keyCode == 8){
+          this.removeNumber();
         }
       },
       setFocus: function(){
         this.$refs.focusHere.focus()
+      },
+      checkIfRootTrue: function(){
+        if(this.displayNum > 0){
+          this.isA = false
+          console.log('körs isA? ', this.isA);
+          console.log("this.displayNum", this.displayNum);
+          console.log("this.result", this.result);
+          console.log("this.currentNum", this.currentNum);
+          console.log("this.oldNum", this.oldNum);
+        }else{
+          this.isA = true;
+        }
+      },
+      checkRootInSwitch: function(){
+        if(this.result > 0){
+          this.isA = false
+        }else{
+          this.isA = true;
+        }
       }
 
-    }
+    } //End-Methods
 
 
   })
