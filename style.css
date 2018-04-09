@@ -1,0 +1,73 @@
+.bigWrap{
+  width: 620px;
+  height: 525px;
+  background-color: lightblue;
+  margin: 0 auto;
+  display: flex;
+}
+.leftWrap{
+  width: 350px;
+  background-color: #dde0e5;
+}
+.rightWrap{
+}
+
+.resultBar{
+  height: 100px;
+}
+
+.kalkText{
+  padding: 10px 0 10px 10px;
+  margin: 0;
+  font-family: arial;
+  font-size: 0.8em;
+  background-color: #dde0e5;
+}
+
+.row{
+  display: flex;
+  justify-content: center;
+
+}
+
+.row div{
+  width: 85px;
+  text-align: center;
+  height: 55px;
+  margin: 2px 2px;
+  line-height: 55px;
+  font-family: arial;
+  background-color: #edeef0;
+}
+
+.row div:hover{
+  cursor: pointer;
+  background-color: #d1d1d1;
+}
+
+.row .numbersBold{
+  background-color: #fafafc;
+  font-weight: bold;
+}
+
+#bigger{
+  font-size: 1.3em;
+}
+
+.inputStyle{
+  width: 325px;
+  background-color: #dde0e5;
+  border: none;
+  font-size: 2em;
+  text-align: right;
+}
+
+.textAreaWrapper{
+  width: 270px;
+  height: 489px;
+  background-color: rgb(221, 224, 229);
+  border: medium none;
+  margin: 0px;
+  padding: 0px;
+  font-family: arial;
+}

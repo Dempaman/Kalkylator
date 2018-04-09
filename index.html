@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lab 5 - Dennis</title>
+
+    <!-- Vue.js länk -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- Font awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+
+    <!-- js och css filer -->
+    <script src="javascript.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+  <body>
+    <div @keyup ="checkKeyUp" id='root' class = 'bigWrap'>
+
+      <div class = 'leftWrap'>
+        <p class = 'kalkText'>Kalkylatorn</p>
+        <div class = 'resultBar'>
+          <input v-focus v-model.number = 'displayNum' class = 'inputStyle'>
+        </div>
+
+        <div class = 'row'>
+          <div></div>
+          <div @click= "rootFunction">√</div>
+          <div @click= "squareFunction">x²</div>
+          <div></div>
+        </div>
+
+        <div class = 'row'>
+          <div @click = "resetAll">CE</div>
+          <div >C</div>
+          <div>«</div>
+          <div @click= "devideFunction" id='bigger'>÷</div>
+        </div>
+
+        <div class = 'row'>
+          <div @click = "setNumber('7')" class = 'numbersBold'>7</div>
+          <div @click = "setNumber('8')" class = 'numbersBold'>8</div>
+          <div @click = "setNumber('9')" class = 'numbersBold'>9</div>
+          <div @click= "multFunction">x</div>
+        </div>
+
+        <div class = 'row'>
+          <div @click = "setNumber('4')" class = 'numbersBold'>4</div>
+          <div @click = "setNumber('5')" class = 'numbersBold'>5</div>
+          <div @click = "setNumber('6')" class = 'numbersBold'>6</div>
+          <div @click= "subFunction">-</div>
+        </div>
+
+        <div class = 'row'>
+          <div @click = "setNumber('1')" class = 'numbersBold'>1</div>
+          <div @click = "setNumber('2')" class = 'numbersBold'>2</div>
+          <div @click = "setNumber('3')" class = 'numbersBold'>3</div>
+          <div @click =  "addFunction">+</div>
+        </div>
+
+        <div class = 'row'>
+          <div></div>
+          <div @click = "setNumber('0')" class = 'numbersBold'>0</div>
+          <div @click = "setNumber('.')">,</div>
+          <div @click = 'counterFunction'>=</div>
+        </div>
+
+      </div>
+
+      <div class = 'rightWrap'>
+        <p class = 'kalkText'>Historik</p>
+        <textarea class = 'textAreaWrapper' v-model = 'historik' ></textarea>
+      </div>
+
+    </div>
+  </body>
+</html>
